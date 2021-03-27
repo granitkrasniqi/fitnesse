@@ -71,6 +71,8 @@ public class ContextConfigurator {
   private TestSystemListener testSystemListener;
   private ClassLoader classLoader;
 
+  private final FitNesseVersion version = new FitNesseVersion();
+
   private ContextConfigurator() {
   }
 
@@ -112,9 +114,7 @@ public class ContextConfigurator {
       port = getPort();
     }
 
-    FitNesseVersion version = new FitNesseVersion();
-
-    updateFitNesseProperties(version);
+    updateFitNesseProperties();
 
     if (wikiPageFactory == null) {
       wikiPageFactory = componentFactory.createComponent(WIKI_PAGE_FACTORY_CLASS, FileSystemPageFactory.class);
@@ -200,7 +200,7 @@ public class ContextConfigurator {
     return context;
   }
 
-  private void updateFitNesseProperties(FitNesseVersion version) {
+  private void updateFitNesseProperties() {
     // Those variables are defined so they can be looked up for as wiki variables.
     if (rootPath != null) {
       properties.setProperty("FITNESSE_ROOTPATH", rootPath);
